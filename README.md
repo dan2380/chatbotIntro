@@ -11,7 +11,7 @@ uses keyword matching, bag of words, and the TF-IDF appraoch to generate a respo
 # Functionality
 
 Ask Eliza (the bot) questions about chatbots, how they work, and the history of it, will respond with
-information on the chatbot Wikipedia page, if its outside the knowledge of the bot, it will say it is unable
+information from the chatbot Wikipedia page, if its outside the knowledge of the bot, it will say it is unable
 answer the question
 
 ## Pre-requisites
