@@ -31,8 +31,8 @@ nltk.download('wordnet')
 
 ## How to run
 
--make sure proper files are installed
--run via termial
+1. installed required packages <br>
+2. run via termial
 
 ```
 python3 chatbot.py
