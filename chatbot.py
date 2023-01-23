@@ -56,3 +56,73 @@ def greeting(greet):
     for word in greet.split():
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
+
+
+"""
+method of Generating response: 
+Bag of Words
+-after we preprocess the text into an array/list of numbers, the bag of words will allow us to keep track of the occurence of 
+certain words within the document
+-we draw a conclusion of the meaning of words simply from the occurence and content of the words and not by the ordering
+
+will use in combination with the TF-IDF Approach (Term Frequency-Inverse Document Frequency)
+-one of the problems with the bag of words approach is that high frequency of certain words may start to dominate the document and we may lose out on 
+informational content, words such as "the", "a", "and"
+-we can combat this by rescaling the frequency of words by how often they appear in all documents so that the scores for frequent words like "the" 
+that are super frequent are penalized
+
+#scores the frequency of a word in a document
+TF = (number of times the term appears in the document)/ (Number of  terms in the document)
+
+#scores how rare the word is accross documents
+IDF = 1+log(N/n), where N is number of documents, n is number of documents the term t has appeared in
+
+We then use Cosign similarity to determine how important the word is to a document
+cosine similarity (d1, d2) = Dot product(d1, d2)/||d1|| * ||d2||
+d1, and d2 are non 0 vectors
+
+We will use the user_response we get and look for keywords in the documenent and return one of the several possible responses, if we cant find any 
+matching keywords matching the user_response, we return "Sorry, That is outside of my knowledge, please ask another Question or rephrase it"
+"""
+
+
+def response(user_response):
+    eliza_response = ''
+    sentence_tokens.append(user_response)
+    TfidfVec = TfidfVectorizer(
+        tokenizer=LemmantizeTokens, stop_words='english')
+    tfidf = TfidfVec.fit_transform(sentence_tokens)
+    vals = cosine_similarity(tfidf[-1], tfidf)
+    idx = vals.argsort()[0][-2]
+    flat = vals.flatten()
+    flat.sort()
+    req_tfidf = flat[-2]
+    if (req_tfidf == 0):
+        eliza_response = eliza_response + \
+            "Sorry, That is outside of my knowledge, Please rephrase or ask a different question!"
+        return eliza_response
+    else:
+        eliza_response = eliza_response+sentence_tokens[idx]
+        return eliza_response
+
+
+# handle what the bot says initially and tell the user how they can exit the chatbot
+flag = True
+print("ELIZA: My name is ELIZA. I will answer your queries about Chatbots. When you are finished, type Bye!")
+while (flag == True):
+    user_response = input()
+    user_response = user_response.lower()
+    if (user_response != 'bye'):
+        if (user_response == 'thanks' or user_response == 'thank you'):
+            flag = False
+            print("ELIZA: You are welcome...")
+        else:
+            if (greeting(user_response) != None):
+                print("ELIZA: " + greeting(user_response))
+            else:
+                print("ELIZA: ", end="")
+                print(response(user_response))
+                sentence_tokens.remove(user_response)
+    else:
+        flag = False
+        print("ELIZA: I enjoyed our chat, Bye now!")
