@@ -14,6 +14,7 @@ For platform-specific instructions, read [here](https://www.nltk.org/install.htm
 
 ```
 pip install nltk
+pip install scikit-learn
 ```
 
 ### Installing required packages
@@ -29,3 +30,13 @@ nltk.download('wordnet')
 ```
 
 ## How to run
+
+-make sure proper files are installed
+-run via termial
+'''
+python3 chatbot.py
+'''
+or
+'''
+python chatbot.py
+'''
