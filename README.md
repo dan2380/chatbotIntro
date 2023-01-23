@@ -8,6 +8,12 @@ Uses the Wikipedia page on chatbots to use as data to pull responses from https:
 Takes in a response from the user and preprocesses it into useful information for the model to understand <br>
 uses keyword matching, bag of words, and the TF-IDF appraoch to generate a response for the user
 
+# Functionality
+
+Ask Eliza (the bot) questions about chatbots, how they work, and the history of it, will respond with
+information on the chatbot Wikipedia page, if its outside the knowledge of the bot, it will say it is unable
+answer the question
+
 ## Pre-requisites
 
 **NLTK(Natural Language Toolkit)**
