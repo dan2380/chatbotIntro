@@ -33,10 +33,13 @@ nltk.download('wordnet')
 
 -make sure proper files are installed
 -run via termial
-'''
+
+```
 python3 chatbot.py
-'''
+```
+
 or
-'''
+
+```
 python chatbot.py
-'''
+```
